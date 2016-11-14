@@ -1,0 +1,52 @@
+{% extends 'bootstrap/base.html' %}
+
+
+{% block title %}Display STP Interface(s) {% for host in hosts %}{{ host['ifDesc'] }} {% endfor %}{% endblock %}
+
+
+{% include 'navbar.html' %}
+
+{% block content %}
+
+ <div class="jumbotron">
+			{% for host in hosts %}
+				<h1>Display STP Interface {{ host['ifDesc'] }}</h1>
+				<p class="lead"></p>
+			{% endfor %}
+ </div>
+<div class="container">
+
+{% with messages = get_flashed_messages() %}
+
+{% if messages %}
+
+<ul class="flashes">
+    {% for message in messages %}
+    <p style=  "color:#ff0000;">
+    <li>{{ message}}</li>
+    {% endfor %}
+
+</ul>
+
+{% endif %}
+
+{% endwith %}
+
+
+    </div>
+
+{% for stp in stpq %}
+	<div class="container">
+	<pre>
+	{{stp.content}}
+	</pre>
+
+	</div>
+{% endfor %}
+
+
+    <footer class="footer">
+            <p>&copy; Company 2015</p>
+        </footer>
+
+{% endblock %}
